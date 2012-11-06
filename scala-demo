@@ -1,5 +1,13 @@
 #!/bin/sh
-curl -O http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.12.1/sbt.zip && \
-unzip sbt.zip && \
-export PATH=./sbt/bin/:$PATH && \
-sbt console
+if [ ! -d "~/.sbt" ]; then
+  echo "Fetching SBT and running console"
+  open http://www.scala-lang.org/node/104
+  curl -O http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.12.1/sbt.zip && \
+  unzip sbt.zip && \
+  export PATH=./sbt/bin/:$PATH && \
+  sbt console
+else
+  echo "Running console"
+  export PATH=./sbt/bin/:$PATH && \
+  sbt console
+fi
